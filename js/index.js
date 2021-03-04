@@ -52,18 +52,18 @@ const ANIMAL = {
         newLine()
     },
 
-    getTimeforDistance(val) {
-        const MAXHOURSPERDAY = 12;
-        const MINTIME = val / this.speedAverage;
-        const ROUNDONEDAY = Math.floor(MINTIME / MAXHOURSPERDAY);
+    getTimeForDistance(val) {
+        const MAX_HOURS_PER_DAY = 12;
+        const MIN_TIME = val / this.speedAverage;
+        const ROUND_ONE_DAY = Math.floor(MIN_TIME / MAX_HOURS_PER_DAY);
         const MESSAGE = 'This animal is able to cut through 1000 km in';
-        if (MINTIME > MAXHOURSPERDAY) {
-            const POSSIBLETIME = `${ROUNDONEDAY} day(s)`;
-            document.write(`${MESSAGE} <span style = 'color:${color2}'>${POSSIBLETIME}</span>`);
+        if (MIN_TIME > MAX_HOURS_PER_DAY) {
+            const POSSIBLE_TIME = `${ROUND_ONE_DAY} day(s)`;
+            document.write(`${MESSAGE} <span style = 'color:${color2}'>${POSSIBLE_TIME}</span>`);
         } else {
-            const HOURSTIME = Math.floor(MINTIME);
-            const POSSIBLETIME = `${HOURSTIME} h`
-            document.write(`${MESSAGE} <span style = 'color:${color2}'>${POSSIBLETIME}</span>`);
+            const HOURS_TIME = Math.floor(MIN_TIME);
+            const POSSIBLE_TIME = `${HOURS_TIME} h`
+            document.write(`${MESSAGE} <span style = 'color:${color2}'>${POSSIBLE_TIME}</span>`);
         }
     },
     changeName() {
@@ -76,7 +76,7 @@ ANIMAL.getInformation();
 
 newLine()
 
-ANIMAL.getTimeforDistance(DISTANCE);
+ANIMAL.getTimeForDistance(DISTANCE);
 
 newLine()
 
@@ -174,7 +174,7 @@ space()
 //     Додаємо можливість збільшувати кількість товару.
 //     Додаємо можливість зменшувати кількість товару (менше 0 бути не може).
 
-const PRODUCTSLIST = {
+const PRODUCTS_LIST = {
     tomato: {count: 6, pricePerOne: 5, buy: false, outOfStore: false},
     banana: {count: 7, pricePerOne: 4, buy: false, outOfStore: true},
     apple: {count: 10, pricePerOne: 2.4, buy: false, outOfStore: false},
@@ -183,72 +183,72 @@ const PRODUCTSLIST = {
     coconut: {count: 1, pricePerOne: 21.99, buy: true, outOfStore: false},
     orange: {count: 5, pricePerOne: 5.8, buy: true, outOfStore: false}
 };
-const INSTOCK = [];
-const OUTOFSTOCK = [];
-const BOUGHTITEMS = [];
+const IN_STOCK = [];
+const OUT_OF_STOCK = [];
+const BOUGHT_ITEMS = [];
 
 const AVAILABILITY = (list) => {
-    for (key in list) {
-        list[key].outOfStore ? OUTOFSTOCK.push(key) : INSTOCK.push(key);
+    for (let key in list) {
+        list[key].outOfStore ? OUT_OF_STOCK.push(key) : IN_STOCK.push(key);
     }
-    const INSTOCKOUTOUT = INSTOCK.join(', ')
-    const OUTOFSTOCKOUTPUT = OUTOFSTOCK.join(', ')
-    document.write(`Items in stock: <span style = 'color:${color2}'>${INSTOCKOUTOUT}</span>`);
+    const IN_STOCK_OUTPUT = IN_STOCK.join(', ')
+    const OUT_OF_STOCK_OUTPUT = OUT_OF_STOCK.join(', ')
+    document.write(`Items in stock: <span style = 'color:${color2}'>${IN_STOCK_OUTPUT}</span>`);
     newLine()
-    document.write(`Items out of stock: <span style = 'color:${color1}'>${OUTOFSTOCKOUTPUT}</span>`);
+    document.write(`Items out of stock: <span style = 'color:${color1}'>${OUT_OF_STOCK_OUTPUT}</span>`);
 }
 
 const BOUGHT = (list) => {
-    for (key in list) {
-        list[key].buy ? BOUGHTITEMS.push(key) : null;
+    for (let key in list) {
+        list[key].buy ? BOUGHT_ITEMS.push(key) : null;
     }
-    const BOUGHTITEMSOUTPUT = BOUGHTITEMS.join(', ')
-    document.write(`Bought items: <span style = 'color:${color3}'>${BOUGHTITEMSOUTPUT}</span>`);
+    const BOUGHT_ITEMS_OUTPUT = BOUGHT_ITEMS.join(', ')
+    document.write(`Bought items: <span style = 'color:${color3}'>${BOUGHT_ITEMS_OUTPUT}</span>`);
 
 }
 
-const BUYITEM = (item) => {
+const BUY_ITEM = (item) => {
     !item.outOfStore ? item.buy = true : alert('Вибачте, бананів немає! :)'); //  alert('Sorry, this item is out of stock.')
 };
 
-const COUNTTOTAL = (list) => {
+const COUNT_TOTAL = (list) => {
     let buyTotal = 0;
     let total = buyTotal.toFixed(2);
-    for (key in list) {
-       if (list[key].buy) {
-           buyTotal += list[key].pricePerOne * list[key].count;
-          total = buyTotal.toFixed(2);
-       }
+    for (let key in list) {
+        if (list[key].buy) {
+            buyTotal += list[key].pricePerOne * list[key].count;
+            total = buyTotal.toFixed(2);
+        }
     }
     document.write(`Total: <span style = 'color:${color3}'>${total}</span> uah`);
 };
 
-const ADDCOUNT = (item) => {
+const ADD_COUNT = (item) => {
     !item.outOfStore  ? item.count++ : item.count;
 };
 
-const REDUCECOUNT = (item) => {
+const REDUCE_COUNT = (item) => {
     !item.outOfStore && item.count !== 1 ? item.count-- : item.count;
 };
 
-AVAILABILITY(PRODUCTSLIST);
+AVAILABILITY(PRODUCTS_LIST);
 
 newLine()
 
-BUYITEM(PRODUCTSLIST.apple);
+BUY_ITEM(PRODUCTS_LIST.apple);
 
-ADDCOUNT(PRODUCTSLIST.tangerine)
+ADD_COUNT(PRODUCTS_LIST.tangerine)
 
-REDUCECOUNT(PRODUCTSLIST.orange);
-REDUCECOUNT(PRODUCTSLIST.orange);
+REDUCE_COUNT(PRODUCTS_LIST.orange);
+REDUCE_COUNT(PRODUCTS_LIST.orange);
 
 
-BOUGHT(PRODUCTSLIST);
+BOUGHT(PRODUCTS_LIST);
 
 newLine()
 
-COUNTTOTAL(PRODUCTSLIST);
-console.table(PRODUCTSLIST);
+COUNT_TOTAL(PRODUCTS_LIST);
+console.table(PRODUCTS_LIST);
 
 space()
 
@@ -296,12 +296,12 @@ space()
 
 //    Вивести всіх адмінів.
 function getAdmins(collection) {
-    const ADMINSOBJECTS = collection.filter((element) => element.type === 'Admin');
-    const ADMINSARRAY = ADMINSOBJECTS.map((element) => element.name);
+    const ADMINS_OBJECTS = collection.filter((element) => element.type === 'Admin');
+    const ADMINS_ARRAY = ADMINS_OBJECTS.map((element) => element.name);
 
-    const ADMINSOUTPUT = ADMINSARRAY.join(', ');
+    const ADMINS_OUTPUT = ADMINS_ARRAY.join(', ');
 
-    document.write(`Our Admins: <span style = 'color:${color1}'>${ADMINSOUTPUT}</span>`);
+    document.write(`Our Admins: <span style = 'color:${color1}'>${ADMINS_OUTPUT}</span>`);
 }
 
 //    Вивести середній вік усіх працівників.
@@ -317,16 +317,16 @@ function getAverageAge(collection) {
 
 //    Вивести тільки унікальні хоббі працівників.
 function getHobbies(collection) {
-    const HOBBIESARRAYOFARRAYS = collection.map((collection) => collection.hobby);
+    const HOBBIES_ARRAY_OF_ARRAYS = collection.map((collection) => collection.hobby);
 
-    const HOBBIESARRAY = [].concat.apply([], HOBBIESARRAYOFARRAYS);
+    const HOBBIES_ARRAY = [].concat.apply([], HOBBIES_ARRAY_OF_ARRAYS);
 
-    const NOREPEATHOBBIES = Array.from(new Set(HOBBIESARRAY));
+    const NO_REPEAT_HOBBIES = Array.from(new Set(HOBBIES_ARRAY));
 
-    const NOREPEATHOBBIESOUTPUT = NOREPEATHOBBIES.join(', ');
+    const NO_REPEAT_HOBBIES_OUTPUT = NO_REPEAT_HOBBIES.join(', ');
 
 // Влaсне, рішення задачі:
-    const GETUNIQUEVALUES = (someArray) =>
+    const GET_UNIQUE_VALUES = (someArray) =>
         someArray.filter((item, index) => {
             someArray.splice(index, 1);
             const UNIQUE = !someArray.includes(item);
@@ -334,41 +334,35 @@ function getHobbies(collection) {
             return UNIQUE;
         });
 
-    const UNIQUEHOBBYVALUESARRAY = GETUNIQUEVALUES(HOBBIESARRAY);
+    const UNIQUE_HOBBY_VALUES_ARRAY = GET_UNIQUE_VALUES(HOBBIES_ARRAY);
 
-    const UNIQUEHOBBYVALUESOUTPUT = UNIQUEHOBBYVALUESARRAY.join(', ');
+    const UNIQUE_HOBBY_VALUES_OUTPUT = UNIQUE_HOBBY_VALUES_ARRAY.join(', ');
 // кінець рішення
 
     function getNamesOfUniqueHobbies(collection) {
-        const ARRAYOFNAMES = [];
+        const ARRAY_OF_NAMES = [];
         collection.forEach((element, index) => {
             let arrayOfHobbies = collection[index].hobby;
-            let checkNames = UNIQUEHOBBYVALUESARRAY.some(
+            let checkNames = UNIQUE_HOBBY_VALUES_ARRAY.some(
                 (val) => arrayOfHobbies.indexOf(val) !== -1
             );
             if (checkNames) {
-                const NAMEOFUNIQUEHOBBIES = collection[index].name;
-                ARRAYOFNAMES.push(NAMEOFUNIQUEHOBBIES);
+                const NAME_OF_UNIQUE_HOBBIES = collection[index].name;
+                ARRAY_OF_NAMES.push(NAME_OF_UNIQUE_HOBBIES);
             }
         });
-        const NAMESOUTPUT = ARRAYOFNAMES.join(', ');
+        const NAMES_OUTPUT = ARRAY_OF_NAMES.join(', ');
 
-        document.write(`Names of users with unique hobbies: <span style = 'color:${color1}'>${NAMESOUTPUT}</span>.`);
+        document.write(`Names of users with unique hobbies: <span style = 'color:${color1}'>${NAMES_OUTPUT}</span>.`);
     }
 
-    document.write(`The list of all hobbies: <span style = 'color:${color1}'>${NOREPEATHOBBIESOUTPUT}</span>.`);
+    document.write(`The list of all hobbies: <span style = 'color:${color1}'>${NO_REPEAT_HOBBIES_OUTPUT}</span>.`);
 
     newLine()
 
-    document.write(`Unique hobbies of all users: <span style = 'color:${color3}'>${UNIQUEHOBBYVALUESOUTPUT}</span>.`);
+    document.write(`Unique hobbies of all users: <span style = 'color:${color3}'>${UNIQUE_HOBBY_VALUES_OUTPUT}</span>.`);
 
     newLine()
 
     getNamesOfUniqueHobbies(USERS);
 }
-
-
-
-
-
-
